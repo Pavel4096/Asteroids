@@ -2,17 +2,20 @@
 {
     public sealed class ShipModel
     {
-        public float speed;
-        public float maxHealth;
+        public float MoveForce { get; }
+        public float Torque { get; }
+        public float MaxHealth { get; }
+        public string Name { get; } = "Ship";
 
-        public ShipModel() : this(25.0f, 1000.0f)
+        public ShipModel() : this(125.0f, 75f, 1000.0f)
         {
         }
 
-        public ShipModel(float speed_, float maxHealth_)
+        public ShipModel(float moveForce_, float torque_, float maxHealth_)
         {
-            speed = speed_;
-            maxHealth = maxHealth_;
+            MoveForce = moveForce_;
+            Torque = torque_;
+            MaxHealth = maxHealth_;
         }
     }
 }

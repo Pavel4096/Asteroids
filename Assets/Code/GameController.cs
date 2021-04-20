@@ -16,7 +16,7 @@ namespace Asteroids
 
         public void Init()
         {
-            playerController = new ShipController();
+            playerController = (new ShipInitializer(gameView)).ShipController;
         }
 
         public void UpdateGame(UserInput userInput, float frameTime)
