@@ -20,6 +20,17 @@
             shipHealth.DestroyedEvent += ShipDestroyed;
         }
 
+        public static ShipController GetShip(Game gameView, ShipModel shipModel)
+        {
+            IView shipView = gameView.CreateView(shipModel.Name);
+            IShipMove shipMove = new ShipMove(shipView.Rigidbody2D, shipModel.MoveForce);
+            IShipRotate shipRotate = new ShipRotate(shipView.Rigidbody2D, shipModel.Torque);
+            IShipHealth shipHealth = new ShipHealth(shipModel.MaxHealth);
+            IShipCollided shipCollided = new ShipCollided(shipView, shipHealth);
+
+            return new ShipController(shipModel, shipView, shipMove, shipRotate, shipCollided, shipHealth);
+        }
+
         public void ProcessInput(UserInput userInput, float frameTime)
         {
             shipMove.Move(userInput.Vertical, frameTime);
