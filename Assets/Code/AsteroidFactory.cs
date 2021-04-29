@@ -7,13 +7,14 @@ namespace Asteroids
     {
         private Game gameView;
         private List<AsteroidModel> models = new List<AsteroidModel>();
-        private PoolManager<AsteroidModel, AsteroidController> poolManager;
+        //private PoolManager<AsteroidModel, AsteroidController> poolManager;
         private Random rnd;
 
         public AsteroidFactory(Game gameView_)
         {
             gameView = gameView_;
-            poolManager = new PoolManager<AsteroidModel, AsteroidController>(CreateNewAsteroid);
+            //poolManager = new PoolManager<AsteroidModel, AsteroidController>(CreateNewAsteroid);
+            PoolLocator.Add<AsteroidModel, AsteroidController>(CreateNewAsteroid);
             rnd = new System.Random();
         }
 
@@ -27,6 +28,7 @@ namespace Asteroids
         {
             AsteroidController asteroidController;
             AsteroidModel model = models[rnd.Next(0, models.Count)];
+            PoolManager<AsteroidModel, AsteroidController> poolManager = PoolLocator.Get<AsteroidModel, AsteroidController>();
 
             asteroidController = poolManager.GetOrCreate(model);
             asteroidController.Initialize();
