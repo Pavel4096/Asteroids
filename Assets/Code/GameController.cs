@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Asteroids
 {
@@ -22,6 +23,11 @@ namespace Asteroids
         {
             playerController = ShipController.GetShip(gameView, new ShipModel());
             asteroidSpawner = new AsteroidSpawner(gameView);
+
+            Debug.Log(5.ToText());
+            Debug.Log(5001.ToText());
+            Debug.Log(1004000.ToText());
+            Debug.Log(2100000000.ToText());
         }
 
         public void UpdateGame(UserInput userInput, float frameTime)
