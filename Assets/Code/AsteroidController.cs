@@ -18,7 +18,7 @@ namespace Asteroids
 
         private static System.Random rnd = new System.Random();
 
-        private const float spawnRadiusScaleFactor = 1.1f;
+        private const float spawnRadiusScaleFactor = 1.2f;
 
         public bool IsActive
         {
