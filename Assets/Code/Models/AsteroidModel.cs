@@ -9,7 +9,7 @@
         public float HealthMax { get; }
         public string Name { get; } = "Asteroid";
 
-        public AsteroidModel(string name = null) : this(0.5f, 1.0f, 5.0f, 10.0f, 1000.0f, name)
+        public AsteroidModel(string name = null) : this(0.5f, 1.0f, 1.0f, 1.5f, 1000.0f, name)
         {
         }
 

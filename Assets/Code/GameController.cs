@@ -11,6 +11,8 @@ namespace Asteroids
 
         private AsteroidFactory asteroidFactory;
 
+        private AsteroidSpawner asteroidSpawner;
+
         public GameController(Game gameView_)
         {
             gameView = gameView_;
@@ -19,12 +21,12 @@ namespace Asteroids
         public void Init()
         {
             playerController = ShipController.GetShip(gameView, new ShipModel());
-
-            SpawnAsteroids();
+            asteroidSpawner = new AsteroidSpawner(gameView);
         }
 
         public void UpdateGame(UserInput userInput, float frameTime)
         {
+            asteroidSpawner.GameLoop(frameTime);
             playerController?.ProcessInput(userInput, frameTime);
             GameLoop?.Invoke(frameTime);
         }
