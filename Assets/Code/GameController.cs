@@ -38,7 +38,7 @@ namespace Asteroids
             AsteroidModel model2 = new AsteroidModel("Asteroid2");
             asteroidFactory.AddModel(model);
             asteroidFactory.AddModel(model2);
-            for(int i = 0; i < 5; i++)
+            for(int i = 0; i < 8; i++)
                 asteroidFactory.GetAsteroid();
         }
     }
