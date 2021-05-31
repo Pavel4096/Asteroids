@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Asteroids
@@ -13,6 +14,9 @@ namespace Asteroids
         private AsteroidFactory asteroidFactory;
 
         private AsteroidSpawner asteroidSpawner;
+
+        private List<EnemyShip> ships;
+        private ShipDestroyedDisplayer shipDestroyedDisplayer;
 
         public GameController(Game gameView_)
         {
@@ -30,7 +34,7 @@ namespace Asteroids
             Debug.Log(2600000000.ToText());
 
             var calculator = new Calculator();
-            Debug.Log(calculator.Compute("3+2 + 10/2 + 2"));
+            Debug.Log(calculator.Compute("6+2 + 10/2 + 2"));
 
             if(playerController is IShipController ship)
             {
@@ -38,6 +42,30 @@ namespace Asteroids
                 modifiers.Add(new ShipHPModifier(ship, 500));
                 modifiers.Add(new ShipArmourModifier(ship, 250));
                 modifiers.Handle();
+            }
+
+            ships = new List<EnemyShip>();
+            shipDestroyedDisplayer = new ShipDestroyedDisplayer();
+            var newShipDisplayer = new NewShipDisplayer();
+            var rnd = new System.Random();
+            for(int i = 0; i < 10; i++)
+            {
+                //EnemyShip currentShip = new EnemyShip();
+                EnemyShip currentShip;
+                if(rnd.Next(0,2) == 0)
+                    currentShip = new EnemyShip();
+                else
+                    currentShip = new AnotherEnemyShip();
+                
+                currentShip.Init(newShipDisplayer);
+                shipDestroyedDisplayer.AddShip(currentShip);
+                ships.Add(currentShip);
+            }
+
+            for(int i = 0; i < 1000; i++)
+            {
+                int index = rnd.Next(0, ships.Count);
+                ships[index].Damage(100);
             }
         }
 
