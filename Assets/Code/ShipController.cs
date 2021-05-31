@@ -1,6 +1,6 @@
 ﻿namespace Asteroids
 {
-    public sealed class ShipController : IPlayerController
+    public sealed class ShipController : IPlayerController, IShipController
     {
         private ShipModel model;
         private IView view;
@@ -10,6 +10,12 @@
         private IShipHealth shipHealth;
         private IShipFire shipFire;
         private FireLock fireLock;
+
+        private const float initial_hp = 1000.0f;
+        private const float initial_armour = 0.0f;
+
+        public float hp;
+        public float armour;
 
         public ShipController(ShipModel model_, IView view_, IShipMove shipMove_, IShipRotate shipRotate_, IShipCollided shipCollided_, IShipHealth shipHealth_, IShipFire _shipFire, FireLock _fireLock)
         {
@@ -22,6 +28,9 @@
             shipHealth.DestroyedEvent += ShipDestroyed;
             shipFire = _shipFire;
             fireLock = _fireLock;
+
+            hp = initial_hp;
+            armour = initial_armour;
         }
 
         public static ShipController GetShip(Game gameView, ShipModel shipModel)
@@ -42,6 +51,16 @@
         {
             shipMove.Move(userInput.Vertical, frameTime);
             shipRotate.Rotate(userInput.Horizontal, frameTime);
+        }
+
+        public void AddHP(float _hp)
+        {
+            hp += _hp;
+        }
+
+        public void AddArmour(float _armour)
+        {
+            armour += _armour;
         }
 
         public void ShipDestroyed()

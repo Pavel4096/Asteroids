@@ -27,7 +27,18 @@ namespace Asteroids
             Debug.Log(5.ToText());
             Debug.Log(5001.ToText());
             Debug.Log(1004000.ToText());
-            Debug.Log(2100000000.ToText());
+            Debug.Log(2600000000.ToText());
+
+            var calculator = new Calculator();
+            Debug.Log(calculator.Compute("3+2 + 10/2 + 2"));
+
+            if(playerController is IShipController ship)
+            {
+                var modifiers = new ShipModifier(ship);
+                modifiers.Add(new ShipHPModifier(ship, 500));
+                modifiers.Add(new ShipArmourModifier(ship, 250));
+                modifiers.Handle();
+            }
         }
 
         public void UpdateGame(UserInput userInput, float frameTime)
